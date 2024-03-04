@@ -7,7 +7,7 @@ import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 
 public class NavLink extends BookmarkablePageLink<Void>
 {
-	private Class pageClass;
+	private Class<? extends Page> pageClass;
 
 	public NavLink(String id, Class<? extends Page> pageClass)
 	{
@@ -32,7 +32,7 @@ public class NavLink extends BookmarkablePageLink<Void>
 		}
 	}
 
-	public Class getPageClassObject() {
+	public Class<? extends Page> getPageClassObject() {
 		return this.pageClass;
 	}
 }

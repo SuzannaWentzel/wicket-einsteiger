@@ -1,6 +1,7 @@
 package nl.suzannawentzel.wicketcompact;
 
 import nl.suzannawentzel.wicketcompact.resources.BootstrapCssResourceReference;
+import nl.suzannawentzel.wicketcompact.resources.CafeOneTheme;
 import nl.suzannawentzel.wicketcompact.resources.DefaultThemeResourceReference;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -26,6 +27,10 @@ public class BaseWebPage extends WebPage {
 	public void renderHead(IHeaderResponse response) {
 		super.renderHead(response);
 		response.render(CssHeaderItem.forReference(BootstrapCssResourceReference.get()));
-		response.render(CssHeaderItem.forReference(DefaultThemeResourceReference.get()));
+		if (tenant == Tenant.CAFEONE) {
+			response.render(CssHeaderItem.forReference(CafeOneTheme.get()));
+		} else {
+			response.render(CssHeaderItem.forReference(DefaultThemeResourceReference.get()));
+		}
 	}
 }
