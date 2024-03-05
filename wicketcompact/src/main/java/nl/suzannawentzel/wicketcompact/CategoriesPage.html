@@ -8,9 +8,18 @@
 <body>
 	<wicket:extend>
 		<h1 class="categoriesHeading">Categories</h1>
-		<ul>
-			<li wicket:id="categories"></li>
-		</ul>
+		<table class="table">
+			<tr>
+				<th>Category</th>
+				<th>Image</th>
+			</tr>
+			<tr wicket:id="categories">
+				<td wicket:id="name">Category</td>
+				<td>
+					<img wicket:id="image" width="150px" />
+				</td>
+			</tr>
+		</table>
 	</wicket:extend>
 </body>
 </html>

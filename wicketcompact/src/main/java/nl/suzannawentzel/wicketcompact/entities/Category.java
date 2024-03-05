@@ -5,8 +5,9 @@ public class Category extends BaseEntity
 	private String name;
 	private String imageUrl;
 
-	public Category(String name) {
+	public Category(String name, String imageUrl) {
 		this.name = name;
+		this.imageUrl = imageUrl;
 	}
 
 	public String getName()
