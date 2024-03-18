@@ -1,6 +1,8 @@
 package nl.suzannawentzel.wicketcompact.entities;
 
-public class Category extends BaseEntity
+import java.io.Serializable;
+
+public class Category extends BaseEntity implements Serializable
 {
 	private String name;
 	private String imageUrl;

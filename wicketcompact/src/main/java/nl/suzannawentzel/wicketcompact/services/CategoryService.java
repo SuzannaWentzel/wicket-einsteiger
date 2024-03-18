@@ -9,10 +9,16 @@ public class CategoryService extends BaseService<Category>
 		final Category tea = new Category("Tea", "https://images.pexels.com/photos/1493080/pexels-photo-1493080.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
 		final Category juices = new Category("Juices", "https://images.pexels.com/photos/1233319/pexels-photo-1233319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
 		final Category milkshakes = new Category("Milkshakes", "https://images.pexels.com/photos/3727250/pexels-photo-3727250.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+		final Category breakfast = new Category("Breakfast", "https://images.freeimages.com/images/large-previews/def/sandwich-4-1525938.jpg");
+		final Category snacks = new Category("Snacks", "https://images.freeimages.com/images/large-previews/0a6/butter-biscuits-1329768.jpg");
+		final Category burgers = new Category("Burgers", "https://images.freeimages.com/images/large-previews/dbe/burger-on-a-plate-1328009.jpg");
 
 		save(coffee);
 		save(tea);
 		save(juices);
 		save(milkshakes);
+		save(breakfast);
+		save(snacks);
+		save(burgers);
 	}
 }
