@@ -5,6 +5,23 @@
 <body>
 	<wicket:extend>
 		<h1>Tables</h1>
+		<table class="table">
+			<tr>
+				<th>Table</th>
+				<th>Seats</th>
+			</tr>
+			<tr wicket:id="tables">
+				<td wicket:id="name"></td>
+				<td wicket:id="seats"></td>
+			</tr>
+		</table>
+		<ul class="pagination pagination-lg">
+			<li wicket:id="navigator" class="page-item">
+				<a wicket:id="pageLink" href="#">
+					<span wicket:id="pageNumber"></span>
+				</a>
+			</li>
+		</ul>
 	</wicket:extend>
 </body>
 </html>

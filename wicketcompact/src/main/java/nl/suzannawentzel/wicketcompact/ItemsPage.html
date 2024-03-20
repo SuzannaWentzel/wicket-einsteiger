@@ -5,6 +5,28 @@
 <body>
 	<wicket:extend>
 		<h1>Items</h1>
+		<table class="table">
+			<tr>
+				<th>Item</th>
+	<!--			<th>Category</th>-->
+				<th>Description</th>
+				<th>Image</th>
+				<th>Price</th>
+			</tr>
+			<tr wicket:id="articles">
+				<td wicket:id="name"></td>
+				<td wicket:id="description"></td>
+				<td><img wicket:id="image" width="150px"></td>
+				<td wicket:id="price"></td>
+			</tr>
+		</table>
+		<ul class="pagination pagination-sm">
+			<li wicket:id="navigator" class="page-item">
+				<a wicket:id="pageLink" href="#">
+					<span wicket:id="pageNumber"></span>
+				</a>
+			</li>
+		</ul>
 	</wicket:extend>
 </body>
 </html>
