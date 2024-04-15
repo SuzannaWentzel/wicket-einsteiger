@@ -7,19 +7,25 @@
 </head>
 <body>
 	<wicket:extend>
-		<h1 class="categoriesHeading">Categories</h1>
-		<table class="table">
-			<tr>
-				<th>Category</th>
-				<th>Image</th>
-			</tr>
-			<tr wicket:id="categories">
-				<td wicket:id="name">Category</td>
-				<td>
-					<img wicket:id="image" width="150px" />
-				</td>
-			</tr>
-		</table>
+		<div class="row">
+			<div class="col-12">
+				<h1 class="categoriesHeading">Categories</h1>
+				<table class="table">
+					<tr>
+						<th>
+							<span wicket:id="orderByName">Category</span>
+						</th>
+						<th>Image</th>
+					</tr>
+					<tr wicket:id="categories">
+						<td wicket:id="name">Category</td>
+						<td>
+							<img wicket:id="image" width="150px" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</wicket:extend>
 </body>
 </html>

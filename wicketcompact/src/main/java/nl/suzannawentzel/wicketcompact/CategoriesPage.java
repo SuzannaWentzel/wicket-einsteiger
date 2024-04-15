@@ -4,6 +4,8 @@ import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.services.CategoryService;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
 import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -24,11 +26,11 @@ import java.util.List;
 public class CategoriesPage extends BaseEntitiesPage
 {
 	private DataView<Category> categories;
+	final SortableDataProvider<Category, String> dataProvider;
 	public CategoriesPage(PageParameters parameters)
 	{
 		super(parameters);
-		final List<Category> categoryList = new ArrayList<>(ServiceRegistry.get(CategoryService.class).listAll());
-		final IDataProvider<Category> dataProvider = new ListDataProvider<Category>(categoryList);
+		dataProvider = new CategoriesDataProvider();
 		categories = new DataView<Category>("categories", dataProvider)
 		{
 			@Override
@@ -53,5 +55,6 @@ public class CategoriesPage extends BaseEntitiesPage
 		super.onInitialize();
 		categories.setItemsPerPage(3);
 		add(categories);
+		add(new OrderByBorder<>("orderByName", "name", this.dataProvider));
 	}
 }
