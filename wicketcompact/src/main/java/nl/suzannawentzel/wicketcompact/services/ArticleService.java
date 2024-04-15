@@ -34,7 +34,7 @@ public class ArticleService extends BaseService<Article> {
 			new BigDecimal("3.20"), "Scones with clotted cream and marmelade");
 		final Article bitterballen = new Article(categoryService.get(6L), "Bitterballen", "https://images.freeimages.com/images/large-previews/a79/cappuccino-1497220.jpg",
 			new BigDecimal("3.20"), "6 crispy bitterballen with mustard");
-		final Article vegaBurger = new Article(categoryService.get(1L), "Vegetarian burger", "https://images.freeimages.com/images/large-previews/a79/cappuccino-1497220.jpg",
+		final Article vegaBurger = new Article(categoryService.get(7L), "Vegetarian burger", "https://images.freeimages.com/images/large-previews/a79/cappuccino-1497220.jpg",
 			new BigDecimal("3.20"), "Nutty burger on an artisan bread with fries, salad and sauces");
 
 		save(cappuccino);

@@ -4,29 +4,33 @@
 </head>
 <body>
 	<wicket:extend>
-		<h1>Items</h1>
-		<table class="table">
-			<tr>
-				<th>Item</th>
-	<!--			<th>Category</th>-->
-				<th>Description</th>
-				<th>Image</th>
-				<th>Price</th>
-			</tr>
-			<tr wicket:id="articles">
-				<td wicket:id="name"></td>
-				<td wicket:id="description"></td>
-				<td><img wicket:id="image" width="150px"></td>
-				<td wicket:id="price"></td>
-			</tr>
-		</table>
-		<ul class="pagination pagination-sm">
-			<li wicket:id="navigator" class="page-item">
-				<a wicket:id="pageLink" href="#">
-					<span wicket:id="pageNumber"></span>
-				</a>
-			</li>
-		</ul>
+		<div class="row">
+			<div class="col-12">
+				<h1>Items</h1>
+				<table class="table">
+					<tr>
+						<th>Item</th>
+						<th>Category</th>
+						<th>Description</th>
+						<th>Price</th>
+						<th>Image</th>
+						<th>Available from</th>
+						<th>Available till</th>
+					</tr>
+					<tr wicket:id="articles">
+						<td wicket:id="name"></td>
+						<td wicket:id="category"></td>
+						<td wicket:id="description"></td>
+						<td wicket:id="price"></td>
+						<td>
+							<img wicket:id="image" width="150px">
+						</td>
+						<td wicket:id="validFrom"></td>
+						<td wicket:id="validTo"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</wicket:extend>
 </body>
 </html>

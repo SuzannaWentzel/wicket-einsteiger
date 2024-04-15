@@ -4,8 +4,20 @@
 </head>
 <body>
 	<wicket:extend>
-		<a wicket:id="linkDashboard">Back to dashboard</a>
-		<wicket:child />
+		<div class="container">
+			<wicket:child/>
+			<div class="row">
+				<div class="col-12">
+					<ul class="pagination">
+						<li wicket:id="navigator" class="page-item">
+							<a wicket:id="pageLink" href="#" class="page-link">
+								<span wicket:id="pageNumber"></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</wicket:extend>
 </body>
 </html>
