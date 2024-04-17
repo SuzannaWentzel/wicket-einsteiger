@@ -18,6 +18,8 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
+import org.apache.wicket.model.LambdaModel;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import java.util.ArrayList;
@@ -36,10 +38,10 @@ public class CategoriesPage extends BaseEntitiesPage
 			@Override
 			protected void populateItem(Item<Category> listItem)
 			{
-				listItem.add(new Label("name", listItem.getModelObject().getName()));
+				Category category = listItem.getModelObject();
+				listItem.add(new Label("name", LambdaModel.of(category::getName)));
 
-				final AttributeAppender srcAppender = new AttributeAppender("src",
-					listItem.getModelObject().getImageUrl());
+				final AttributeAppender srcAppender = new AttributeAppender("src", LambdaModel.of(category::getImageUrl));
 				listItem.add(new WebMarkupContainer("image").add(srcAppender));
 			}
 		};
