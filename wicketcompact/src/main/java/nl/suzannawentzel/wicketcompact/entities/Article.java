@@ -1,8 +1,7 @@
 package nl.suzannawentzel.wicketcompact.entities;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-public class Article extends BaseEntity implements Serializable
+public class Article extends BaseEntity
 {
 	private Category category;
 	private LocalDate validFrom = LocalDate.now();

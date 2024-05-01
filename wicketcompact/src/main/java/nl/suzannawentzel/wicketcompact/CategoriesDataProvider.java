@@ -1,6 +1,7 @@
 package nl.suzannawentzel.wicketcompact;
 
 import nl.suzannawentzel.wicketcompact.entities.Category;
+import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.services.CategoryService;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
@@ -46,6 +47,6 @@ public class CategoriesDataProvider extends SortableDataProvider<Category, Strin
 	@Override
 	public IModel<Category> model(Category object)
 	{
-		return Model.of(object);
+		return new EntityModel<Category, CategoryService>(object.getId(), CategoryService.class);
 	}
 }

@@ -1,8 +1,5 @@
 package nl.suzannawentzel.wicketcompact.entities;
-
-import java.io.Serializable;
-
-public class Table extends BaseEntity implements Serializable
+public class Table extends BaseEntity
 {
 	private String name;
 	private Integer seatCount;
