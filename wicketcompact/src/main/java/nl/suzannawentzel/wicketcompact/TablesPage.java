@@ -6,18 +6,17 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.navigation.paging.IPageable;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
+import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class TablesPage extends BaseEntitiesPage
 {
 	private final DataView<Table> tables;
-	final SortableDataProvider<Table, String> dataProvider;
-
 
 	public TablesPage(PageParameters parameters)
 	{
 		super(parameters);
-		dataProvider = new TablesDataProvider();
+		IDataProvider<Table> dataProvider = new TablesDataProvider();
 		this.tables = new DataView<Table>("tables", dataProvider)
 		{
 			@Override

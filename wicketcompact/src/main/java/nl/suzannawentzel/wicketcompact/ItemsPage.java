@@ -25,12 +25,11 @@ import java.util.List;
 public class ItemsPage extends BaseEntitiesPage
 {
 	private final DataView<Article> articles;
-	private final SortableDataProvider<Article, String> dataProvider;
 
 	public ItemsPage(PageParameters parameters)
 	{
 		super(parameters);
-		dataProvider = new ItemsDataProvider();
+		IDataProvider<Article> dataProvider = new ItemsDataProvider();
 		this.articles = new DataView<Article>("articles", dataProvider)
 		{
 			@Override

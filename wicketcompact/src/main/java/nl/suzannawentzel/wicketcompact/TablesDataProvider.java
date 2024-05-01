@@ -12,10 +12,6 @@ import java.util.Iterator;
 
 public class TablesDataProvider extends SortableDataProvider<Table, String>
 {
-	public TablesDataProvider() {
-		setSort("name", SortOrder.ASCENDING);
-	}
-
 	@Override
 	public Iterator<? extends Table> iterator(long first, long count)
 	{
