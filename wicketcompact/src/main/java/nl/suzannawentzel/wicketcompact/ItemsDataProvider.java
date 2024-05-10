@@ -33,6 +33,6 @@ public class ItemsDataProvider extends SortableDataProvider<Article, String>
 	@Override
 	public IModel<Article> model(Article object)
 	{
-		return new EntityModel<Article, ArticleService>(object.getId(), ArticleService.class);
+		return new EntityModel<>(object, ArticleService.class);
 	}
 }

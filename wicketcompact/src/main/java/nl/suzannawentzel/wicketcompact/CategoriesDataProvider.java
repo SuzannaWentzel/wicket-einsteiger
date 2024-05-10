@@ -7,6 +7,7 @@ import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
+import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
@@ -45,8 +46,8 @@ public class CategoriesDataProvider extends SortableDataProvider<Category, Strin
 	}
 
 	@Override
-	public IModel<Category> model(Category object)
+	public IModel<Category> model(Category category)
 	{
-		return new EntityModel<Category, CategoryService>(object.getId(), CategoryService.class);
+		return new CompoundPropertyModel<>(new EntityModel<>(category, CategoryService.class));
 	}
 }
