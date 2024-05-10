@@ -77,7 +77,7 @@ public class CategoriesPage extends BaseEntitiesPage
 
 	private void initializeForm()
 	{
-		form.setModel(new CompoundPropertyModel(new EntityModel<>(new Category(null, null), CategoryService.class)));
+		form.setModel(new CompoundPropertyModel<>(formEntityModel));
 		add(form);
 		form.add(new TextField<String>("name"));
 		form.add(new TextField<String>("imageUrl"));
