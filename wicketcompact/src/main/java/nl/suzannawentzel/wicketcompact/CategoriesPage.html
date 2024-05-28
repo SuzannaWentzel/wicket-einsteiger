@@ -28,9 +28,10 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<a wicket:id="newCategory">Add new category</a>
+				<a class="btn btn-outline-primary mb-3" wicket:id="newCategory">Add new category</a>
 			</div>
 		</div>
+		<div wicket:id="feedback"></div>
 		<form wicket:id="form">
 			<div class="form-group row">
 				<label class="col-3 col-form-label">Name</label>
@@ -40,7 +41,7 @@
 				<label class="col-3 col-form-label">Image URL</label>
 				<input type="text" placeholder="URL here" class="col-9 form-control" wicket:id="imageUrl">
 			</div>
-			<div class="row">
+			<div class="row mb-3">
 				<div class="col-12">
 					<input type="submit" value="Save" class="btn btn-primary">
 				</div>

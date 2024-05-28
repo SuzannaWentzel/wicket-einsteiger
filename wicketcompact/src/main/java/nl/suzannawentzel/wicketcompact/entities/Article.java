@@ -22,6 +22,10 @@ public class Article extends BaseEntity
 		this.setValidTo(LocalDate.MAX);
 	}
 
+	public Article() {
+		this(null, null, null, null, null);
+	}
+
 	public Category getCategory() {
 		return category;
 	}

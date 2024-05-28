@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ItemsDataProvider extends SortableDataProvider<Article, String>
+public class ItemsDataProvider extends SortableDataProvider<Article, Void>
 {
 	@Override
 	public Iterator<? extends Article> iterator(long first, long count)

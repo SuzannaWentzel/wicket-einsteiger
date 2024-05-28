@@ -1,30 +1,51 @@
 package nl.suzannawentzel.wicketcompact;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import nl.suzannawentzel.wicketcompact.entities.Article;
 import nl.suzannawentzel.wicketcompact.entities.Category;
+import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.services.ArticleService;
+import nl.suzannawentzel.wicketcompact.services.CategoryService;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
+import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.behavior.AttributeAppender;
-import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
+import org.apache.wicket.extensions.markup.html.form.datetime.LocalDateTextField;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextArea;
+import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.navigation.paging.IPageable;
-import org.apache.wicket.markup.html.navigation.paging.PagingNavigation;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
-import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.validation.validator.RangeValidator;
+import org.apache.wicket.validation.validator.UrlValidator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.FormatStyle;
 
 public class ItemsPage extends BaseEntitiesPage
 {
 	private final DataView<Article> articles;
+
+	private final Form<Article> form = new Form<Article>("form") {
+		@Override
+		protected void onSubmit() {
+			super.onSubmit();
+			form.setVisible(false);
+			Category category = ServiceRegistry.get(CategoryService.class).get(7L);
+			form.getModelObject().setCategory(category);
+			ServiceRegistry.get(ArticleService.class).save(form.getModelObject());
+		}
+	};
 
 	public ItemsPage(PageParameters parameters)
 	{
@@ -54,6 +75,32 @@ public class ItemsPage extends BaseEntitiesPage
 		super.onInitialize();
 		articles.setItemsPerPage(3);
 		add(articles);
+		add(new Link<String>("newArticle") {
+			@Override
+			public void onClick() {
+				form.setVisible(true);
+				form.setModelObject(new Article());
+				Category category = ServiceRegistry.get(CategoryService.class).get(7L);
+				form.getModelObject().setCategory(category);
+
+			}
+		});
+		initializeForm();
+	}
+
+	private void initializeForm() {
+		form.setVisible(false);
+		add(form);
+		add(new FeedbackPanel("feedback"));
+		form.setModel(new CompoundPropertyModel<>(new EntityModel<>(ArticleService.class)));
+		form.add(new TextField<String>("name").setRequired(true).setLabel(Model.of("Name")));
+		form.add(new TextArea<String>("description").setRequired(true).setLabel(Model.of("Description")));
+		form.add(new TextField<BigDecimal>("price").setRequired(true).setLabel(Model.of("Price")).add(new RangeValidator<>(BigDecimal.ZERO, new BigDecimal("20"))));
+		form.add(new LocalDateTextField("validFrom", FormatStyle.SHORT).setLabel(Model.of("Valid from")).add(new RangeValidator<>(
+			LocalDate.now(), LocalDate.now().plusDays(365))));
+		form.add(new LocalDateTextField("validTo", FormatStyle.SHORT).setLabel(Model.of("Valid to")).add(new RangeValidator<>(LocalDate.now().plusDays(1),
+			LocalDate.MAX)));
+		form.add(new TextField<String>("imageUrl").setLabel(Model.of("Image URL")).setRequired(true).add(new UrlValidator()));
 	}
 
 	@Override

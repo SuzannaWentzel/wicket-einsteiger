@@ -12,6 +12,7 @@ public class CategoryService extends BaseService<Category>
 		final Category breakfast = new Category("Breakfast", "https://images.freeimages.com/images/large-previews/def/sandwich-4-1525938.jpg");
 		final Category snacks = new Category("Snacks", "https://images.freeimages.com/images/large-previews/0a6/butter-biscuits-1329768.jpg");
 		final Category burgers = new Category("Burgers", "https://images.freeimages.com/images/large-previews/dbe/burger-on-a-plate-1328009.jpg");
+		final Category other = new Category("Other", "https://images.pexels.com/photos/20264758/pexels-photo-20264758/free-photo-of-colorful-macaroons-in-a-studio.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
 
 		save(coffee);
 		save(tea);
@@ -20,5 +21,6 @@ public class CategoryService extends BaseService<Category>
 		save(breakfast);
 		save(snacks);
 		save(burgers);
+		save(other);
 	}
 }
