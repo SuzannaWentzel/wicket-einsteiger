@@ -8,10 +8,13 @@ import nl.suzannawentzel.wicketcompact.services.ArticleService;
 import nl.suzannawentzel.wicketcompact.services.CategoryService;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
 import org.apache.wicket.WicketRuntimeException;
+import org.apache.wicket.bean.validation.PropertyValidator;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.extensions.markup.html.form.datetime.LocalDateTextField;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.ChoiceRenderer;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
@@ -41,9 +44,8 @@ public class ItemsPage extends BaseEntitiesPage
 		protected void onSubmit() {
 			super.onSubmit();
 			form.setVisible(false);
-			Category category = ServiceRegistry.get(CategoryService.class).get(7L);
-			form.getModelObject().setCategory(category);
 			ServiceRegistry.get(ArticleService.class).save(form.getModelObject());
+			form.success("Item has been added!");
 		}
 	};
 
@@ -56,6 +58,7 @@ public class ItemsPage extends BaseEntitiesPage
 			@Override
 			protected void populateItem(Item<Article> item)
 			{
+				final Article article = item.getModelObject();
 				item.setModel(new CompoundPropertyModel<>(item.getModel()));
 				item.add(new Label("name"));
 				item.add(new Label("description"));
@@ -63,7 +66,7 @@ public class ItemsPage extends BaseEntitiesPage
 				item.add(new Label("category.name"));
 				item.add(new Label("validFrom"));
 				item.add(new Label("validTo"));
-				final AttributeAppender srcAppender = new AttributeAppender("src", new PropertyModel<>(item.getModel(), "imageUrl"));
+				final AttributeAppender srcAppender = new AttributeAppender("src", new PropertyModel<>(new EntityModel<>(article, ArticleService.class), "imageUrl"));
 				item.add(new WebMarkupContainer("image").add(srcAppender));
 			}
 		};
@@ -80,9 +83,6 @@ public class ItemsPage extends BaseEntitiesPage
 			public void onClick() {
 				form.setVisible(true);
 				form.setModelObject(new Article());
-				Category category = ServiceRegistry.get(CategoryService.class).get(7L);
-				form.getModelObject().setCategory(category);
-
 			}
 		});
 		initializeForm();
@@ -91,10 +91,12 @@ public class ItemsPage extends BaseEntitiesPage
 	private void initializeForm() {
 		form.setVisible(false);
 		add(form);
-		add(new FeedbackPanel("feedback"));
+		add(new ValidationErrorFeedbackPanel("validationFeedback"));
+		add(new SuccessFeedbackPanel("successFeedback"));
 		form.setModel(new CompoundPropertyModel<>(new EntityModel<>(ArticleService.class)));
 		form.add(new TextField<String>("name").setRequired(true).setLabel(Model.of("Name")));
 		form.add(new TextArea<String>("description").setRequired(true).setLabel(Model.of("Description")));
+		form.add(new DropDownChoice<Category>("category", new CategoryListModel(), new ChoiceRenderer<Category>("name", "id")).add(new PropertyValidator<>()));
 		form.add(new TextField<BigDecimal>("price").setRequired(true).setLabel(Model.of("Price")).add(new RangeValidator<>(BigDecimal.ZERO, new BigDecimal("20"))));
 		form.add(new LocalDateTextField("validFrom", FormatStyle.SHORT).setLabel(Model.of("Valid from")).add(new RangeValidator<>(
 			LocalDate.now(), LocalDate.now().plusDays(365))));
