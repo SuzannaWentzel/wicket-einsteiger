@@ -1,4 +1,4 @@
-package nl.suzannawentzel.wicketcompact;
+package nl.suzannawentzel.wicketcompact.categories;
 
 import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;

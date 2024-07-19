@@ -1,17 +1,10 @@
 package nl.suzannawentzel.wicketcompact;
 
-import nl.suzannawentzel.wicketcompact.resources.LogoResourceReference;
-import org.apache.wicket.MarkupContainer;
+import nl.suzannawentzel.wicketcompact.categories.CategoriesPage;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.image.ContextImage;
-import org.apache.wicket.markup.html.image.Image;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.xml.sax.helpers.AttributesImpl;
-
-import java.awt.print.Book;
 
 public class Header extends Panel
 {

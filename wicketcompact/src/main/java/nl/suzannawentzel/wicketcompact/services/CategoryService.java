@@ -23,4 +23,13 @@ public class CategoryService extends BaseService<Category>
 		save(burgers);
 		save(other);
 	}
+
+	public Category getByName(String name) {
+		for (Category category : this.listAll()) {
+			if (category.getName().equals(name)) {
+				return category;
+			}
+		}
+		return null;
+	}
 }
