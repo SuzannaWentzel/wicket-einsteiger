@@ -3,9 +3,6 @@ package nl.suzannawentzel.wicketcompact.categories;
 import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.services.CategoryService;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
-import org.apache.wicket.validation.IValidatable;
-import org.apache.wicket.validation.ValidationError;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

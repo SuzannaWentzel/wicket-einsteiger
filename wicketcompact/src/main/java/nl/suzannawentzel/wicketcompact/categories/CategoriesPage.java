@@ -1,6 +1,8 @@
 package nl.suzannawentzel.wicketcompact.categories;
 
 import nl.suzannawentzel.wicketcompact.BaseEntitiesPage;
+import nl.suzannawentzel.wicketcompact.SuccessFeedbackPanel;
+import nl.suzannawentzel.wicketcompact.ValidationErrorFeedbackPanel;
 import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.services.CategoryService;
@@ -15,13 +17,11 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.navigation.paging.IPageable;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.validation.validator.UrlValidator;
 
 public class CategoriesPage extends BaseEntitiesPage
 {
@@ -33,6 +33,7 @@ public class CategoriesPage extends BaseEntitiesPage
 			super.onSubmit();
 			ServiceRegistry.get(CategoryService.class).save(this.getModelObject());
 			form.setVisible(false);
+			form.success("The category has been saved!");
 		}
 	};
 	private final EntityModel<Category, CategoryService> formEntityModel = new EntityModel<>(CategoryService.class);
@@ -77,7 +78,8 @@ public class CategoriesPage extends BaseEntitiesPage
 
 	private void initializeForm()
 	{
-		add(new FeedbackPanel("feedback"));
+		add(new ValidationErrorFeedbackPanel("validationFeedback"));
+		add(new SuccessFeedbackPanel("successFeedback"));
 		form.setModel(new CompoundPropertyModel<>(formEntityModel));
 		add(form);
 		form.add(new TextField<String>("name").add(new PropertyValidator<>()));
