@@ -1,7 +1,18 @@
 package nl.suzannawentzel.wicketcompact.entities;
+
+import nl.suzannawentzel.wicketcompact.categories.UniqueCategoryName;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class Category extends BaseEntity
 {
+	@NotNull()
+	@UniqueCategoryName
 	private String name;
+
+	@NotNull()
+	@Pattern(regexp = "http[s]?://[.]*\\.jpg", message = "{category.imageurl.invalid}")
 	private String imageUrl;
 
 	public Category(String name, String imageUrl) {

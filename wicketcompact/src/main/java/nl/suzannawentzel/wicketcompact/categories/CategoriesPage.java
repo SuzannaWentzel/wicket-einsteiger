@@ -5,6 +5,7 @@ import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.services.CategoryService;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
+import org.apache.wicket.bean.validation.PropertyValidator;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
@@ -79,8 +80,8 @@ public class CategoriesPage extends BaseEntitiesPage
 		add(new FeedbackPanel("feedback"));
 		form.setModel(new CompoundPropertyModel<>(formEntityModel));
 		add(form);
-		form.add(new TextField<String>("name").setRequired(true).add(new UniqueCategoryNameValidator()));
-		form.add(new TextField<String>("imageUrl").setRequired(true).add(new UrlValidator()));
+		form.add(new TextField<String>("name").add(new PropertyValidator<>()));
+		form.add(new TextField<String>("imageUrl").add(new PropertyValidator<>()));
 		form.setVisible(false);
 	}
 }
