@@ -98,9 +98,9 @@ public class ItemsPage extends BaseEntitiesPage
 		form.add(new TextArea<String>("description").setRequired(true).setLabel(Model.of("Description")));
 		form.add(new DropDownChoice<Category>("category", new CategoryListModel(), new ChoiceRenderer<Category>("name", "id")).add(new PropertyValidator<>()));
 		form.add(new TextField<BigDecimal>("price").setRequired(true).setLabel(Model.of("Price")).add(new RangeValidator<>(BigDecimal.ZERO, new BigDecimal("20"))));
-		form.add(new LocalDateTextField("validFrom", FormatStyle.SHORT).setLabel(Model.of("Valid from")).add(new RangeValidator<>(
+		form.add(new TextField<>("validFrom").setLabel(Model.of("Valid from")).add(new RangeValidator<>(
 			LocalDate.now(), LocalDate.now().plusDays(365))));
-		form.add(new LocalDateTextField("validTo", FormatStyle.SHORT).setLabel(Model.of("Valid to")).add(new RangeValidator<>(LocalDate.now().plusDays(1),
+		form.add(new TextField<>("validTo").setLabel(Model.of("Valid to")).add(new RangeValidator<>(LocalDate.now().plusDays(1),
 			LocalDate.MAX)));
 		form.add(new TextField<String>("imageUrl").setLabel(Model.of("Image URL")).setRequired(true).add(new UrlValidator()));
 	}
