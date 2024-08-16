@@ -1,9 +1,18 @@
 package nl.suzannawentzel.wicketcompact;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import nl.suzannawentzel.wicketcompact.articles.CreateArticlePage;
+import nl.suzannawentzel.wicketcompact.articles.ItemsPage;
+import nl.suzannawentzel.wicketcompact.articles.ModifyArticlePage;
+import nl.suzannawentzel.wicketcompact.categories.CategoriesPage;
+import nl.suzannawentzel.wicketcompact.categories.CreateCategoryPage;
+import nl.suzannawentzel.wicketcompact.categories.ModifyCategoryPage;
 import nl.suzannawentzel.wicketcompact.converters.BooleanConverter;
 import nl.suzannawentzel.wicketcompact.converters.CurrencyConverter;
 import nl.suzannawentzel.wicketcompact.converters.LocalDateConverter;
+import nl.suzannawentzel.wicketcompact.tables.CreateTablePage;
+import nl.suzannawentzel.wicketcompact.tables.ModifyTablePage;
+import nl.suzannawentzel.wicketcompact.tables.TablesPage;
 import org.apache.wicket.ConverterLocator;
 import org.apache.wicket.IConverterLocator;
 import org.apache.wicket.bean.validation.BeanValidationConfiguration;
@@ -40,6 +49,19 @@ public class WicketApplication extends WebApplication
 		super.init();
 		new BeanValidationConfiguration().configure(this);
 		// add your configuration here
+
+		mountPage("/articles", ItemsPage.class);
+		mountPage("/article/${id}", ModifyArticlePage.class);
+		mountPage("/article/new", CreateArticlePage.class);
+
+		mountPage("/categories", CategoriesPage.class);
+		mountPage("/category/${id}", ModifyCategoryPage.class);
+		mountPage("/category/new", CreateCategoryPage.class);
+
+		mountPage("/tables", TablesPage.class);
+		mountPage("/table/${id}", ModifyTablePage.class);
+		mountPage("/table/new", CreateTablePage.class);
+
 	}
 
 	@Override

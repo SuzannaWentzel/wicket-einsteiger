@@ -13,9 +13,11 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.validation.validator.UrlValidator;
 
@@ -33,10 +35,13 @@ public class EditArticle extends Panel
 		}
 	};
 
+	private final TextField<String> nameField;
+
 	public EditArticle(String id)
 	{
 		super(id);
 		form.setModel(new CompoundPropertyModel<>(new EntityModel<>(ArticleService.class)));
+		this.nameField = new TextField<>("name");
 	}
 
 	@Override
@@ -49,7 +54,7 @@ public class EditArticle extends Panel
 	private void initializeForm() {
 		add(form);
 		add(new ValidationErrorFeedbackPanel("validationFeedback"));
-		form.add(new TextField<String>("name").setRequired(true).setLabel(Model.of("Name")));
+		form.add(nameField.setRequired(true).setLabel(Model.of("Name")));
 		form.add(new TextArea<String>("description").setRequired(true).setLabel(Model.of("Description")));
 		form.add(new DropDownChoice<Category>("category", new CategoryListModel(), new ChoiceRenderer<Category>("name", "id")).add(new PropertyValidator<>()));
 		form.add(new TextField<BigDecimal>("price").setRequired(true).setLabel(Model.of("Price")).add(new RangeValidator<>(BigDecimal.ZERO, new BigDecimal("20"))));
@@ -58,6 +63,13 @@ public class EditArticle extends Panel
 		form.add(new TextField<>("validTo").setLabel(Model.of("Valid to")).add(new RangeValidator<>(LocalDate.now().plusDays(1),
 			LocalDate.MAX)));
 		form.add(new TextField<String>("imageUrl").setLabel(Model.of("Image URL")).setRequired(true).add(new UrlValidator()));
+		form.add(new ExternalLink("help", new Model<String>() {
+			@Override
+			public String getObject()
+			{
+				return "https://de.wikipedia.org/wiki/" + EditArticle.this.nameField.getModelObject();
+			}
+		}));
 	}
 
 	void setArticle(Article article) {
