@@ -15,6 +15,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.navigation.paging.IPageable;
 import org.apache.wicket.markup.repeater.Item;
@@ -27,16 +28,6 @@ public class CategoriesPage extends BaseEntitiesPage
 {
 	private DataView<Category> categories;
 	final SortableDataProvider<Category, String> dataProvider;
-	private final Form form = new Form<Category>("form") {
-		@Override
-		protected void onSubmit() {
-			super.onSubmit();
-			ServiceRegistry.get(CategoryService.class).save(this.getModelObject());
-			form.setVisible(false);
-			form.success("The category has been saved!");
-		}
-	};
-	private final EntityModel<Category, CategoryService> formEntityModel = new EntityModel<>(CategoryService.class);
 	public CategoriesPage(PageParameters parameters)
 	{
 		super(parameters);
@@ -51,6 +42,7 @@ public class CategoriesPage extends BaseEntitiesPage
 
 				final AttributeAppender srcAppender = new AttributeAppender("src", new PropertyModel<>(new EntityModel<>(category, CategoryService.class), "imageUrl"));
 				listItem.add(new WebMarkupContainer("image").add(srcAppender));
+				listItem.add(new BookmarkablePageLink<>("modifyCategory", ModifyCategoryPage.class, new PageParameters().add("id", listItem.getModelObject().getId())));
 			}
 		};
 	}
@@ -66,24 +58,6 @@ public class CategoriesPage extends BaseEntitiesPage
 		categories.setItemsPerPage(3);
 		add(categories);
 		add(new OrderByBorder<>("orderByName", "name", this.dataProvider));
-		add(new Link<String>("newCategory") {
-			@Override
-			public void onClick() {
-				form.setVisible(true);
-				formEntityModel.setObject(new Category());
-			}
-		});
-		initializeForm();
 	}
 
-	private void initializeForm()
-	{
-		add(new ValidationErrorFeedbackPanel("validationFeedback"));
-		add(new SuccessFeedbackPanel("successFeedback"));
-		form.setModel(new CompoundPropertyModel<>(formEntityModel));
-		add(form);
-		form.add(new TextField<String>("name").add(new PropertyValidator<>()));
-		form.add(new TextField<String>("imageUrl").add(new PropertyValidator<>()));
-		form.setVisible(false);
-	}
 }
