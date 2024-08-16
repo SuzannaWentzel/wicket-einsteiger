@@ -3,6 +3,7 @@ package nl.suzannawentzel.wicketcompact.tables;
 import nl.suzannawentzel.wicketcompact.BaseEntitiesPage;
 import nl.suzannawentzel.wicketcompact.entities.Table;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.navigation.paging.IPageable;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
@@ -26,6 +27,7 @@ public class TablesPage extends BaseEntitiesPage
 				item.add(new Label("name",table.getName()));
 				item.add(new Label("seats", table.getSeatCount()));
 				item.add(new Label("orderableElectronically", table.getOrderableElectronically()));
+				item.add(new BookmarkablePageLink<>("modifyTable", ModifyTablePage.class, new PageParameters().add("id", item.getModelObject().getId())));
 			}
 		};
 	}

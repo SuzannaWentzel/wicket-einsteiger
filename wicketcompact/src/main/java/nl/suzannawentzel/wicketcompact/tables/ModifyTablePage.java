@@ -2,12 +2,13 @@ package nl.suzannawentzel.wicketcompact.tables;
 
 import nl.suzannawentzel.wicketcompact.BaseWebPage;
 import nl.suzannawentzel.wicketcompact.entities.Table;
+import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
+import nl.suzannawentzel.wicketcompact.services.TableService;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class CreateTablePage extends BaseWebPage
+public class ModifyTablePage extends BaseWebPage
 {
-
-	public CreateTablePage(PageParameters parameters)
+	public ModifyTablePage(PageParameters parameters)
 	{
 		super(parameters);
 	}
@@ -17,7 +18,8 @@ public class CreateTablePage extends BaseWebPage
 	{
 		super.onInitialize();
 		final EditTable tableEditPanel = new EditTable("editTable");
-		tableEditPanel.setTable(new Table());
+		final Long tableId = getPageParameters().get("id").to(Long.class);
+		tableEditPanel.setTable(ServiceRegistry.get(TableService.class).get(tableId));
 		add(tableEditPanel);
 	}
 }

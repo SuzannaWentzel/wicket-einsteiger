@@ -37,5 +37,4 @@ public class BaseService<T extends BaseEntity>
 	public Collection<T> listAll() {
 		return entities.values();
 	}
-
 }
