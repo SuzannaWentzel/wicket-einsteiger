@@ -1,6 +1,8 @@
 package nl.suzannawentzel.wicketcompact;
 
+import nl.suzannawentzel.wicketcompact.articles.ItemsPage;
 import nl.suzannawentzel.wicketcompact.categories.CategoriesPage;
+import nl.suzannawentzel.wicketcompact.tables.TablesPage;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.image.ContextImage;

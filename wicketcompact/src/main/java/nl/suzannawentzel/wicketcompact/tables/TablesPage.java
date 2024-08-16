@@ -1,17 +1,16 @@
-package nl.suzannawentzel.wicketcompact;
+package nl.suzannawentzel.wicketcompact.tables;
 
-import nl.suzannawentzel.wicketcompact.entities.Article;
+import nl.suzannawentzel.wicketcompact.BaseEntitiesPage;
+import nl.suzannawentzel.wicketcompact.SuccessFeedbackPanel;
+import nl.suzannawentzel.wicketcompact.ValidationErrorFeedbackPanel;
 import nl.suzannawentzel.wicketcompact.entities.Table;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
 import nl.suzannawentzel.wicketcompact.services.TableService;
-import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
-import org.apache.wicket.markup.html.form.CheckBoxMultipleChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.Radio;
-import org.apache.wicket.markup.html.form.RadioChoice;
 import org.apache.wicket.markup.html.form.RadioGroup;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.Link;

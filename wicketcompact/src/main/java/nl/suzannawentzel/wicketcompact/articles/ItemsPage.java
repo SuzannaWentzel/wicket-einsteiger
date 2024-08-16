@@ -1,13 +1,12 @@
-package nl.suzannawentzel.wicketcompact;
+package nl.suzannawentzel.wicketcompact.articles;
 
+import nl.suzannawentzel.wicketcompact.BaseEntitiesPage;
 import nl.suzannawentzel.wicketcompact.entities.Article;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.services.ArticleService;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.navigation.paging.IPageable;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;

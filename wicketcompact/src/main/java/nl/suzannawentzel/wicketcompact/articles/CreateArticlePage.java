@@ -1,5 +1,8 @@
-package nl.suzannawentzel.wicketcompact;
+package nl.suzannawentzel.wicketcompact.articles;
 
+import nl.suzannawentzel.wicketcompact.BaseWebPage;
+import nl.suzannawentzel.wicketcompact.categories.CategoryListModel;
+import nl.suzannawentzel.wicketcompact.ValidationErrorFeedbackPanel;
 import nl.suzannawentzel.wicketcompact.entities.Article;
 import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;
