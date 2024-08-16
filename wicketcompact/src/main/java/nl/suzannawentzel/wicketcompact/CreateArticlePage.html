@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+	<head>
+	</head>
+	<body>
+		<wicket:extend>
+			<h1>Create new article</h1>
+			<div wicket:id="validationFeedback"></div>
+			<form wicket:id="form">
+				<div class="form-group row">
+					<label class="col-3 col-form-label">Name</label>
+					<input type="text" class="col-9 form-control" wicket:id="name">
+				</div>
+				<div class="form-group row">
+					<label class="col-3 col-form-label">Description</label>
+					<textarea class="col-9 form-control" wicket:id="description"></textarea>
+				</div>
+				<div class="form-group row">
+					<label class="col-3 col-form-label">Category</label>
+					<select class="col-9 form-control" wicket:id="category"></select>
+				</div>
+				<div class="form-group row">
+					<label class="col-3 col-form-label">Price</label>
+					<input type="text" class="col-9 form-control" wicket:id="price">
+				</div>
+				<div class="form-group row">
+					<label class="col-3 col-form-label">Valid from</label>
+					<input type="text" class="col-9 form-control" wicket:id="validFrom">
+				</div>
+				<div class="form-group row">
+					<label class="col-3 col-form-label">Valid to</label>
+					<input type="text" class="col-9 form-control" wicket:id="validTo">
+				</div>
+				<div class="form-group row">
+					<label class="col-3 col-form-label">Image URL</label>
+					<input type="text" class="col-9 form-control" wicket:id="imageUrl">
+				</div>
+				<div class="row mb-3">
+					<div class="col-12">
+						<input type="submit" value="Save item" class="btn btn-primary">
+					</div>
+				</div>
+			</form>
+		</wicket:extend>
+	</body>
+</html>
+
+
