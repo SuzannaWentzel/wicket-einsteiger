@@ -1,7 +1,11 @@
 package nl.suzannawentzel.wicketcompact.services;
 
 import nl.suzannawentzel.wicketcompact.entities.Article;
+import nl.suzannawentzel.wicketcompact.entities.Category;
+
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ArticleService extends BaseService<Article> {
 
@@ -51,5 +55,11 @@ public class ArticleService extends BaseService<Article> {
 		save(scones);
 		save(bitterballen);
 		save(vegaBurger);
+	}
+
+	public List<Article> listByCategory(final Category category)
+	{
+		return listAll().stream().filter(item -> item.getCategory().equals(category)).collect(
+			Collectors.toList());
 	}
 }
