@@ -34,6 +34,10 @@ public class EntityModel<T extends BaseEntity, S extends BaseService<T>> extends
 		super.setObject(object);
 		this.entity = object;
 		this.entityClass = (Class<T>) object.getClass();
+		final Long id = this.entity.getId();
+		if (id != null) {
+			this.id = id;
+		}
 	}
 
 	@Override
