@@ -19,15 +19,18 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-group row">
-				<label class="col-3 col-form-label">Order electronically?</label>
-				<input type="checkbox" class="col-9 form-control form-check-input" wicket:id="orderableElectronically">
-			</div>
-			<div class="row mb-3">
-				<div class="col-12">
-					<input type="submit" value="Save table" class="btn btn-primary">
+			<div class="row">
+				<div class="col-8">
+					<div class="form-group row">
+						<label class="col-3 col-form-label">Order electronically?</label>
+						<input type="checkbox" class="col-9 form-control form-check-input" wicket:id="orderableElectronically">
+					</div>
 				</div>
+
+				<object wicket:id="qrCode" class="col-4" height="300px"></object>
 			</div>
+
+			<input type="submit" value="Save table" class="btn btn-primary">
 		</form>
 	</wicket:panel>
 </body>
