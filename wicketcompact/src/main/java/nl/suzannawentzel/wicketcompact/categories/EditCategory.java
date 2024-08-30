@@ -1,5 +1,6 @@
 package nl.suzannawentzel.wicketcompact.categories;
 
+import nl.suzannawentzel.wicketcompact.LoadingIndicatorAjaxSubmitLink;
 import nl.suzannawentzel.wicketcompact.ValidationErrorFeedbackPanel;
 import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;
@@ -48,7 +49,7 @@ public class EditCategory extends Panel
 		add(form);
 		form.add(new TextField<String>("name").add(new PropertyValidator<>()));
 		form.add(new TextField<String>("imageUrl").add(new PropertyValidator<>()));
-		form.add(new AjaxSubmitLink("save") {
+		form.add(new LoadingIndicatorAjaxSubmitLink("save") {
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target) {
