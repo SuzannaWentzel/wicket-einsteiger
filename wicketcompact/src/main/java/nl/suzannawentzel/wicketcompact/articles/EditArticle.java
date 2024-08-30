@@ -7,15 +7,21 @@ import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.services.ArticleService;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
+import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.bean.validation.PropertyValidator;
+import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableChoiceLabel;
+import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableLabel;
+import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableMultiLineLabel;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.RangeValidator;
@@ -35,13 +41,13 @@ public class EditArticle extends Panel
 		}
 	};
 
-	private final TextField<String> nameField;
+	private final AjaxEditableLabel<String> nameField;
 
 	public EditArticle(String id)
 	{
 		super(id);
 		form.setModel(new CompoundPropertyModel<>(new EntityModel<>(ArticleService.class)));
-		this.nameField = new TextField<>("name");
+		this.nameField = new AjaxEditableLabel<>("name");
 	}
 
 	@Override
@@ -54,15 +60,13 @@ public class EditArticle extends Panel
 	private void initializeForm() {
 		add(form);
 		add(new ValidationErrorFeedbackPanel("validationFeedback"));
-		form.add(nameField.setRequired(true).setLabel(Model.of("Name")));
-		form.add(new TextArea<String>("description").setRequired(true).setLabel(Model.of("Description")));
-		form.add(new DropDownChoice<Category>("category", new CategoryListModel(), new ChoiceRenderer<Category>("name", "id")).add(new PropertyValidator<>()));
-		form.add(new TextField<BigDecimal>("price").setRequired(true).setLabel(Model.of("Price")).add(new RangeValidator<>(BigDecimal.ZERO, new BigDecimal("20"))));
-		form.add(new TextField<>("validFrom").setLabel(Model.of("Valid from")).add(new RangeValidator<>(
-			LocalDate.now(), LocalDate.now().plusDays(365))));
-		form.add(new TextField<>("validTo").setLabel(Model.of("Valid to")).add(new RangeValidator<>(LocalDate.now().plusDays(1),
-			LocalDate.MAX)));
-		form.add(new TextField<String>("imageUrl").setLabel(Model.of("Image URL")).setRequired(true).add(new UrlValidator()));
+		form.add(nameField);
+		form.add(new AjaxEditableMultiLineLabel<>("description").setLabel(Model.of("Description")));
+		form.add(new AjaxEditableChoiceLabel<>("category", null, new CategoryListModel(), new ChoiceRenderer<>("name", "id")));
+		form.add(new AjaxEditableLabel<>("price").setLabel(Model.of("Price")));
+		form.add(new AjaxEditableLabel<>("validFrom").setLabel(Model.of("Valid from")).add(RangeValidator.maximum(LocalDate.now().plusMonths(3))));
+		form.add(new AjaxEditableLabel<>("validTo").setLabel(Model.of("Valid to")).add(RangeValidator.minimum(LocalDate.now().plusDays(1))));
+		form.add(new AjaxEditableLabel<>("imageUrl").setLabel(Model.of("Image URL")));
 		form.add(new ExternalLink("help", new Model<String>() {
 			@Override
 			public String getObject()
