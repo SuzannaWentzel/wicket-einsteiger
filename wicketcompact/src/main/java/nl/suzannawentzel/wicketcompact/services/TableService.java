@@ -2,6 +2,9 @@ package nl.suzannawentzel.wicketcompact.services;
 
 import nl.suzannawentzel.wicketcompact.entities.Table;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class TableService extends BaseService<Table> {
 
 	public TableService() {
@@ -26,5 +29,16 @@ public class TableService extends BaseService<Table> {
 		save(table9);
 		save(table10);
 		save(table6);
+	}
+
+	public List<String> listTableNamesContaining(String nameFragment) {
+		return listAll().stream().filter(table -> table.getName().toLowerCase().contains(nameFragment.toLowerCase())).map(Table::getName).collect(
+			Collectors.toList());
+	}
+
+	public Table getByName(String name)
+	{
+		final List<Table> filtered = listAll().stream().filter(table -> table.getName().equals(name)).collect(Collectors.toList());
+		return filtered.isEmpty()? null: filtered.get(0);
 	}
 }

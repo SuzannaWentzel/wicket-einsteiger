@@ -10,3 +10,8 @@
 .w_content_container{
     padding: 1em;
 }
+
+.autocomplete li {
+    background-color: white;
+    padding: 0 70px;
+}
