@@ -20,14 +20,11 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-8">
-					<div class="form-group row">
-						<label class="col-3 col-form-label">Order electronically?</label>
-						<input type="checkbox" class="col-9 form-control form-check-input" wicket:id="orderableElectronically">
-					</div>
+				<label class="col-3 col-form-label">Order electronically?</label>
+				<div class="col-7 form-group">
+					<input type="checkbox" class="form-control form-check-input" wicket:id="orderableElectronically">
 				</div>
-
-				<object wicket:id="qrCode" class="col-4" height="300px"></object>
+				<object wicket:id="qrCode" class="col-2" width="100%"></object>
 			</div>
 
 			<input type="submit" value="Save table" class="btn btn-primary">
