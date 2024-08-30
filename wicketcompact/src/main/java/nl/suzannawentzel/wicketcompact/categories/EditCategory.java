@@ -5,6 +5,8 @@ import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.services.CategoryService;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.bean.validation.PropertyValidator;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -24,6 +26,8 @@ public class EditCategory extends Panel
 		}
 	};
 
+	private ValidationErrorFeedbackPanel validationFeedback;
+
 	public EditCategory(String id)
 	{
 		super(id);
@@ -39,10 +43,18 @@ public class EditCategory extends Panel
 
 	private void initializeForm()
 	{
-		add(new ValidationErrorFeedbackPanel("validationFeedback"));
+		validationFeedback = new ValidationErrorFeedbackPanel("validationFeedback");
+		add(validationFeedback);
 		add(form);
 		form.add(new TextField<String>("name").add(new PropertyValidator<>()));
 		form.add(new TextField<String>("imageUrl").add(new PropertyValidator<>()));
+		form.add(new AjaxSubmitLink("save") {
+			@Override
+			protected void onError(AjaxRequestTarget target) {
+				super.onSubmit(target);
+				target.add(EditCategory.this.validationFeedback);
+			}
+		});
 	}
 
 	void setCategory(Category category) {

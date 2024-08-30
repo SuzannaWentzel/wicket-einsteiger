@@ -9,5 +9,6 @@ public class ValidationErrorFeedbackPanel extends FeedbackPanel
 	public ValidationErrorFeedbackPanel(String id)
 	{
 		super(id, new ExactLevelFeedbackMessageFilter(FeedbackMessage.ERROR));
+		setOutputMarkupPlaceholderTag(true);
 	}
 }
