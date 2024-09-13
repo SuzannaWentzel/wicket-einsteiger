@@ -1,6 +1,7 @@
 package nl.suzannawentzel.wicketcompact.categories;
 
 import nl.suzannawentzel.wicketcompact.LoadingIndicatorAjaxSubmitLink;
+import nl.suzannawentzel.wicketcompact.SgFeedbackPanel;
 import nl.suzannawentzel.wicketcompact.ValidationErrorFeedbackPanel;
 import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;
@@ -12,6 +13,7 @@ import org.apache.wicket.bean.validation.PropertyValidator;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 
@@ -27,7 +29,7 @@ public class EditCategory extends Panel
 		}
 	};
 
-	private ValidationErrorFeedbackPanel validationFeedback;
+	private FeedbackPanel validationFeedback;
 
 	public EditCategory(String id)
 	{
@@ -44,7 +46,7 @@ public class EditCategory extends Panel
 
 	private void initializeForm()
 	{
-		validationFeedback = new ValidationErrorFeedbackPanel("validationFeedback");
+		validationFeedback = new SgFeedbackPanel("validationFeedback");
 		add(validationFeedback);
 		add(form);
 		form.add(new TextField<String>("name").add(new PropertyValidator<>()));
