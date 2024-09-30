@@ -8,6 +8,7 @@ import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.services.ArticleService;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
+import nl.suzannawentzel.wicketcompact.tables.Datepicker;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -59,7 +60,6 @@ public class EditArticle extends Panel
 	{
 		super(id);
 		form.setModel(new CompoundPropertyModel<>(new EntityModel<>(ArticleService.class)));
-		this.nameField = new TextField<>("name");
 		helpLink = new ExternalLink("help", new Model<String>()
 		{
 			@Override
@@ -71,6 +71,7 @@ public class EditArticle extends Panel
 
 		helpLink.setOutputMarkupId(true);
 
+		this.nameField = new TextField<>("name");
 		nameField.add(new AjaxFormComponentUpdatingBehavior("change") {
 			@Override
 			protected void onUpdate(AjaxRequestTarget target)
@@ -109,12 +110,11 @@ public class EditArticle extends Panel
 		add(form);
 		add(new ValidationErrorFeedbackPanel("validationFeedback"));
 		form.add(nameField.add(new PropertyValidator<>()));
-		form.add(new AjaxEditableMultiLineLabel<>("description").setLabel(Model.of("Description")));
-		form.add(new AjaxEditableChoiceLabel<>("category", null, new CategoryListModel(), new ChoiceRenderer<>("name", "id")));
-		form.add(new AjaxEditableLabel<>("price").setLabel(Model.of("Price")));
-//		form.add(new AjaxEditableLabel<>("validFrom").setLabel(Model.of("Valid from")).add(RangeValidator.maximum(LocalDate.now().plusMonths(3))));
-		form.add(new JQueryDateField("validFrom", Model.of(form.getModelObject().getValidFrom()), "dd/MM/yyyy", "nl-NL").setLabel(Model.of("Valid from")).add(RangeValidator.maximum(LocalDate.now().plusMonths(3))));
-		form.add(new AjaxEditableLabel<>("validTo").setLabel(Model.of("Valid to")).add(RangeValidator.minimum(LocalDate.now().plusDays(1))));
+		form.add(new TextArea<String>("description").add(new PropertyValidator<>()).setLabel(Model.of("Description")));
+		form.add(new DropDownChoice<>("category", new CategoryListModel(), new ChoiceRenderer<>("name", "id")).add(new PropertyValidator<>()));
+		form.add(new TextField<>("price").add(new PropertyValidator<>()).setLabel(Model.of("Price")));
+		form.add(new Datepicker("validFrom").setLabel(Model.of("Valid from")).add(RangeValidator.maximum(LocalDate.now().plusMonths(3))));
+		form.add(new Datepicker("validTo").setLabel(Model.of("Valid to")).add(RangeValidator.minimum(LocalDate.now().plusDays(1))));
 		form.add(imageUrl);
 		form.add(image);
 		form.add(this.helpLink);
