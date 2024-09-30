@@ -1,5 +1,6 @@
 package nl.suzannawentzel.wicketcompact.articles;
 
+import nl.suzannawentzel.wicketcompact.JQueryDateField;
 import nl.suzannawentzel.wicketcompact.ValidationErrorFeedbackPanel;
 import nl.suzannawentzel.wicketcompact.categories.CategoryListModel;
 import nl.suzannawentzel.wicketcompact.entities.Article;
@@ -111,7 +112,8 @@ public class EditArticle extends Panel
 		form.add(new AjaxEditableMultiLineLabel<>("description").setLabel(Model.of("Description")));
 		form.add(new AjaxEditableChoiceLabel<>("category", null, new CategoryListModel(), new ChoiceRenderer<>("name", "id")));
 		form.add(new AjaxEditableLabel<>("price").setLabel(Model.of("Price")));
-		form.add(new AjaxEditableLabel<>("validFrom").setLabel(Model.of("Valid from")).add(RangeValidator.maximum(LocalDate.now().plusMonths(3))));
+//		form.add(new AjaxEditableLabel<>("validFrom").setLabel(Model.of("Valid from")).add(RangeValidator.maximum(LocalDate.now().plusMonths(3))));
+		form.add(new JQueryDateField("validFrom", Model.of(form.getModelObject().getValidFrom()), "dd/MM/yyyy", "nl-NL").setLabel(Model.of("Valid from")).add(RangeValidator.maximum(LocalDate.now().plusMonths(3))));
 		form.add(new AjaxEditableLabel<>("validTo").setLabel(Model.of("Valid to")).add(RangeValidator.minimum(LocalDate.now().plusDays(1))));
 		form.add(imageUrl);
 		form.add(image);
