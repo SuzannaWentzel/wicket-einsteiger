@@ -1,6 +1,5 @@
 package nl.suzannawentzel.wicketcompact;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import nl.suzannawentzel.wicketcompact.articles.CreateArticlePage;
 import nl.suzannawentzel.wicketcompact.articles.ItemsPage;
 import nl.suzannawentzel.wicketcompact.articles.ModifyArticlePage;
@@ -10,7 +9,7 @@ import nl.suzannawentzel.wicketcompact.categories.ModifyCategoryPage;
 import nl.suzannawentzel.wicketcompact.converters.BooleanConverter;
 import nl.suzannawentzel.wicketcompact.converters.CurrencyConverter;
 import nl.suzannawentzel.wicketcompact.converters.LocalDateConverter;
-import nl.suzannawentzel.wicketcompact.customers.TablePage;
+import nl.suzannawentzel.wicketcompact.customers.Menu;
 import nl.suzannawentzel.wicketcompact.tables.CreateTablePage;
 import nl.suzannawentzel.wicketcompact.tables.ModifyTablePage;
 import nl.suzannawentzel.wicketcompact.tables.TablesPage;
@@ -19,7 +18,6 @@ import org.apache.wicket.IConverterLocator;
 import org.apache.wicket.bean.validation.BeanValidationConfiguration;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.util.convert.converter.IntegerConverter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -60,10 +58,10 @@ public class WicketApplication extends WebApplication
 		mountPage("/category/new", CreateCategoryPage.class);
 
 		mountPage("/tables", TablesPage.class);
-		mountPage("/table/edit/${id}", ModifyTablePage.class);
+		mountPage("/table/${id}", ModifyTablePage.class);
 		mountPage("/table/new", CreateTablePage.class);
 
-		mountPage("/table/${id}", TablePage.class);
+		mountPage("/menu", Menu.class);
 
 	}
 
