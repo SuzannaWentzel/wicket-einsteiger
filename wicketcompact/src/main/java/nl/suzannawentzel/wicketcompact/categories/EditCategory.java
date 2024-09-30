@@ -7,7 +7,10 @@ import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.services.CategoryService;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.attributes.AjaxCallListener;
+import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.bean.validation.PropertyValidator;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
@@ -63,6 +66,24 @@ public class EditCategory extends Panel
 			protected void onError(AjaxRequestTarget target) {
 				super.onSubmit(target);
 				target.add(EditCategory.this.validationFeedback);
+			}
+
+			@Override
+			protected void updateAjaxAttributes(AjaxRequestAttributes attributes)
+			{
+				super.updateAjaxAttributes(attributes);
+				attributes.getAjaxCallListeners().add(new AjaxCallListener() {
+					@Override
+					public CharSequence getBeforeSendHandler(Component component) {
+						return String.format("$('#%s').attr('disabled', 'disabled');", getMarkupId());
+					}
+
+					@Override
+					public CharSequence getCompleteHandler(Component component)
+					{
+						return String.format("$('#%s').removeAttr('disabled');", getMarkupId());
+					}
+				});
 			}
 		});
 	}
