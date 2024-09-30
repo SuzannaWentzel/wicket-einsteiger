@@ -10,6 +10,7 @@ import nl.suzannawentzel.wicketcompact.categories.ModifyCategoryPage;
 import nl.suzannawentzel.wicketcompact.converters.BooleanConverter;
 import nl.suzannawentzel.wicketcompact.converters.CurrencyConverter;
 import nl.suzannawentzel.wicketcompact.converters.LocalDateConverter;
+import nl.suzannawentzel.wicketcompact.customers.TablePage;
 import nl.suzannawentzel.wicketcompact.tables.CreateTablePage;
 import nl.suzannawentzel.wicketcompact.tables.ModifyTablePage;
 import nl.suzannawentzel.wicketcompact.tables.TablesPage;
@@ -59,8 +60,10 @@ public class WicketApplication extends WebApplication
 		mountPage("/category/new", CreateCategoryPage.class);
 
 		mountPage("/tables", TablesPage.class);
-		mountPage("/table/${id}", ModifyTablePage.class);
+		mountPage("/table/edit/${id}", ModifyTablePage.class);
 		mountPage("/table/new", CreateTablePage.class);
+
+		mountPage("/table/${id}", TablePage.class);
 
 	}
 
