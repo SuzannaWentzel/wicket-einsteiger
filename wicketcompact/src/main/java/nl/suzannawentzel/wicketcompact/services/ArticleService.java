@@ -4,6 +4,7 @@ import nl.suzannawentzel.wicketcompact.entities.Article;
 import nl.suzannawentzel.wicketcompact.entities.Category;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,5 +62,18 @@ public class ArticleService extends BaseService<Article> {
 	{
 		return listAll().stream().filter(item -> item.getCategory().equals(category)).collect(
 			Collectors.toList());
+	}
+
+	public List<Article> listByCategoryFilterValid(final Category category) {
+		return listAll().stream().filter(item -> item.getCategory().equals(category) && isValid(item)).collect(Collectors.toList());
+	}
+
+	public Boolean isValid(Article article) {
+		return isAfterOrEqual(LocalDate.now(), article.getValidFrom()) && LocalDate.now().isBefore(article.getValidTo());
+	}
+
+	public Boolean isAfterOrEqual(LocalDate date1, LocalDate date2)
+	{
+		return date1.isAfter(date2) || date1.equals(date2);
 	}
 }

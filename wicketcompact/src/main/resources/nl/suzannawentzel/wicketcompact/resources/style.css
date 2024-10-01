@@ -15,3 +15,7 @@
     background-color: white;
     padding: 0 70px;
 }
+
+.card-title {
+    font-weight: bold;
+}

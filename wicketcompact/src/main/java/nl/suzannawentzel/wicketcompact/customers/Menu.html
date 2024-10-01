@@ -4,12 +4,21 @@
 	<title>Menu - Suus's Cookies</title>
 </head>
 <body>
-<main class="container mt-5">
-	<h1>Menu for <span wicket:id="tableName" class="badge badge-light"></span></h1>
+<main class="container my-5">
+	<h1 class="mb-4">Menu for <span wicket:id="tableName" class="badge badge-light ml-3"></span></h1>
 	<div wicket:id="notElectronicallyOrderableMessage" class="row alert alert-info">
 		<span class="col-12">
 			Sorry, it is currently not possible to order online for this table. Please wait for the waiter to pass by.
 		</span>
+	</div>
+	<div wicket:id="categoriesList" class="mb-5">
+		<h2 wicket:id="categoryName"></h2>
+		<hr>
+		<div class="row">
+			<div wicket:id="itemList" class="col-4">
+				<div wicket:id="itemCard"></div>
+			</div>
+		</div>
 	</div>
 </main>
 
