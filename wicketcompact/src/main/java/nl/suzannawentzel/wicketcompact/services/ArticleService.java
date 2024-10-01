@@ -64,7 +64,7 @@ public class ArticleService extends BaseService<Article> {
 			Collectors.toList());
 	}
 
-	public List<Article> listByCategoryFilterValid(final Category category) {
+	public List<Article> listValidByCategory(final Category category) {
 		return listAll().stream().filter(item -> item.getCategory().equals(category) && isValid(item)).collect(Collectors.toList());
 	}
 
