@@ -1,9 +1,9 @@
 package nl.suzannawentzel.wicketcompact.customers;
 
 import nl.suzannawentzel.wicketcompact.categories.CategoriesDataProvider;
-import nl.suzannawentzel.wicketcompact.categories.CategoryPanel;
 import nl.suzannawentzel.wicketcompact.entities.Category;
 import nl.suzannawentzel.wicketcompact.entities.Table;
+import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.resources.BootstrapCssResourceReference;
 import nl.suzannawentzel.wicketcompact.resources.DefaultThemeResourceReference;
 import nl.suzannawentzel.wicketcompact.services.ServiceRegistry;
@@ -15,12 +15,15 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
+import org.apache.wicket.model.IModel;
 
 public class Menu extends WebPage
 {
 	private final WebMarkupContainer tableNotSupportingOrderingOnlineHint;
 
 	private final DataView<Category> categoryDataView;
+
+	private IModel<Table> tableModel = new EntityModel<Table, TableService>(TableService.class);
 
 	public Menu() {
 		this.tableNotSupportingOrderingOnlineHint = new WebMarkupContainer("notElectronicallyOrderableMessage");
@@ -38,10 +41,12 @@ public class Menu extends WebPage
 	protected void onInitialize()
 	{
 		super.onInitialize();
+
 		final Long tableId = getPageParameters().get("tableId").toLong();
-		Table table = ServiceRegistry.get(TableService.class).get(tableId);
-		add(new Label("tableName", table.getName()));
-		this.tableNotSupportingOrderingOnlineHint.setVisible(!table.getOrderableElectronically());
+		tableModel.setObject(ServiceRegistry.get(TableService.class).get(tableId));
+
+		add(new Label("tableName", tableModel.getObject().getName()));
+		this.tableNotSupportingOrderingOnlineHint.setVisible(!tableModel.getObject().getOrderableElectronically());
 		add(this.tableNotSupportingOrderingOnlineHint);
 		add(this.categoryDataView);
 	}
@@ -51,5 +56,9 @@ public class Menu extends WebPage
 		super.renderHead(response);
 		response.render(CssHeaderItem.forReference(BootstrapCssResourceReference.get()));
 		response.render(CssHeaderItem.forReference(DefaultThemeResourceReference.get()));
+	}
+
+	public Table getTable() {
+		return this.tableModel.getObject();
 	}
 }

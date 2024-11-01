@@ -14,6 +14,14 @@ public class Order extends BaseEntity
 
 	private BigDecimal totalPrice;
 
+	public Order(Table table, Article article, Integer quantity) {
+		this.table = table;
+		this.article = article;
+		this.quantity = quantity;
+		this.status = OrderStatus.NEW;
+		this.totalPrice = article.getPrice().multiply(BigDecimal.valueOf(quantity));
+	}
+
 	public Table getTable()
 	{
 		return table;

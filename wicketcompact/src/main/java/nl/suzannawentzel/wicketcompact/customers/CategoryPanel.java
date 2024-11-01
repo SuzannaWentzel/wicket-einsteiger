@@ -1,9 +1,9 @@
-package nl.suzannawentzel.wicketcompact.categories;
+package nl.suzannawentzel.wicketcompact.customers;
 
-import nl.suzannawentzel.wicketcompact.articles.ArticleCard;
 import nl.suzannawentzel.wicketcompact.articles.ItemsByCategoryDataProvider;
 import nl.suzannawentzel.wicketcompact.entities.Article;
 import nl.suzannawentzel.wicketcompact.entities.Category;
+import nl.suzannawentzel.wicketcompact.entities.Table;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;

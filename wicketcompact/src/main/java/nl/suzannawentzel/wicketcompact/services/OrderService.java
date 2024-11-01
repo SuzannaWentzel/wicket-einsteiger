@@ -10,4 +10,9 @@ public class OrderService extends BaseService<Order>
 	public BigDecimal salesFor(final Article article) {
 		return listAll().stream().filter(order -> order.getArticle().equals(article)).map(order -> order.getArticle().getPrice().multiply(new BigDecimal(order.getQuantity()))).reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
+
+	public BigDecimal computeTotalPrice(final Article article, Integer amount)
+	{
+		return article.getPrice().multiply(new BigDecimal(amount));
+	}
 }

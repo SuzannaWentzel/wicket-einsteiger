@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class BaseService<T extends BaseEntity>
 {
-	private static long ENTITY_ID_COUNTER = 0;
+	private long ENTITY_ID_COUNTER = 0;
 
 	private Map<Long, T> entities = new HashMap<>();
 

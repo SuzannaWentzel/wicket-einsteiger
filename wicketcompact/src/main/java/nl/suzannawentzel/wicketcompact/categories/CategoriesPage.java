@@ -87,10 +87,9 @@ public class CategoriesPage extends BaseEntitiesPage
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		add(categoriesParent);
 		categories.setItemsPerPage(3);
 		categoriesParent.add(categories);
-		categoriesParent.setOutputMarkupId(true);
+		categoriesParent.setOutputMarkupPlaceholderTag(true);
 		categoriesParent.add(new OrderByBorder<>("orderByName", "name", this.dataProvider));
 
 		this.dialog = new ModalWindow("dialog");
