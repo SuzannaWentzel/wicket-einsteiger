@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<body>
+<wicket:extend>
+	<h2>Welcome to Suus's Cookies</h2>
+
+	<div class="card">
+		<div class="card-body">
+			<h3 class="card-title">Profit per item</h3>
+			<p class="card-text">You can see the profit for all categories and items here.</p>
+			<div wicket:id="dashboardTree"></div>
+		</div>
+	</div>
+
+	<div class="card">
+		<div class="card-body">
+			<h3 class="card-title">All orders</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Amount</th>
+						<th scope="col">Item</th>
+						<th scope="col">Table</th>
+						<th scope="col">Created at</th>
+						<th scope="col">Status</th>
+					</tr>
+				</thead>
+				<tbody wicket:id="ordersParent">
+					<tr wicket:id="orders">
+						<td><span wicket:id="quantity"></span></td>
+						<td wicket:id="article.name"></td>
+						<td wicket:id="table.name"></td>
+						<td wicket:id="createdAt"></td>
+						<td wicket:id="status.text" class="badge"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</wicket:extend>
+</body>
+</html>

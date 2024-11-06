@@ -4,6 +4,9 @@ import nl.suzannawentzel.wicketcompact.entities.Article;
 import nl.suzannawentzel.wicketcompact.entities.Order;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class OrderService extends BaseService<Order>
 {
@@ -11,8 +14,9 @@ public class OrderService extends BaseService<Order>
 		return listAll().stream().filter(order -> order.getArticle().equals(article)).map(order -> order.getArticle().getPrice().multiply(new BigDecimal(order.getQuantity()))).reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 
-	public BigDecimal computeTotalPrice(final Article article, Integer amount)
-	{
-		return article.getPrice().multiply(new BigDecimal(amount));
+	public List<Order> listByDateDesc() {
+		final ArrayList<Order> orders = new ArrayList<>(listAll());
+		orders.sort(Comparator.comparing(Order::getCreatedAt));
+		return orders;
 	}
 }

@@ -1,6 +1,8 @@
 package nl.suzannawentzel.wicketcompact.entities;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Order extends BaseEntity
 {
@@ -14,12 +16,15 @@ public class Order extends BaseEntity
 
 	private BigDecimal totalPrice;
 
+	private LocalDateTime createdAt;
+
 	public Order(Table table, Article article, Integer quantity) {
 		this.table = table;
 		this.article = article;
 		this.quantity = quantity;
 		this.status = OrderStatus.NEW;
 		this.totalPrice = article.getPrice().multiply(BigDecimal.valueOf(quantity));
+		this.createdAt = LocalDateTime.now();
 	}
 
 	public Table getTable()
@@ -70,5 +75,10 @@ public class Order extends BaseEntity
 	public void setTotalPrice(BigDecimal totalPrice)
 	{
 		this.totalPrice = totalPrice;
+	}
+
+	public LocalDateTime getCreatedAt()
+	{
+		return createdAt;
 	}
 }

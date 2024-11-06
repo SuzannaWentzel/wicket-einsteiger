@@ -1,5 +1,6 @@
 package nl.suzannawentzel.wicketcompact;
 
+import nl.suzannawentzel.wicketcompact.dashboard.HomePage;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
