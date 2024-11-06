@@ -16,21 +16,30 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.model.CompoundPropertyModel;
 
 public class LoginPage extends WebPage
 {
+	private static final String USERNAME = "user";
+	private static final String PASSWORD = "veryStrongPassword";
+
 	private TextField<String> usernameField;
 	private PasswordTextField passwordField;
 
 	private FeedbackPanel loginFeedback;
 
-	private final Form<Credentials> form = new Form<Credentials>("loginForm")
+	private final Form<Credentials> form = new Form<Credentials>("loginForm", CompoundPropertyModel.of(new Credentials()))
 	{
 		@Override
 		protected void onSubmit()
 		{
 			super.onSubmit();
-			setResponsePage(LoginPage.class);
+
+			if (!isValid(form.getModelObject())) {
+				error("Credentials invalid");
+			} else {
+				setResponsePage(LoginPage.class);
+			}
 		}
 	};
 
@@ -43,7 +52,6 @@ public class LoginPage extends WebPage
 
 	private void initializeForm()
 	{
-		form.setModel(new Credentials());
 		loginFeedback = new SgFeedbackPanel("loginFeedback");
 		add(loginFeedback);
 		add(form);
@@ -51,38 +59,6 @@ public class LoginPage extends WebPage
 		passwordField = new PasswordTextField("password");
 		form.add(usernameField);
 		form.add(passwordField);
-		form.add(new LoadingIndicatorAjaxSubmitLink("btnLogin") {
-
-			@Override
-			protected void onSubmit(AjaxRequestTarget target) {
-				super.onSubmit(target);
-				target.add(LoginPage.this.loginFeedback);
-			}
-
-			@Override
-			protected void onError(AjaxRequestTarget target) {
-				super.onSubmit(target);
-				target.add(LoginPage.this.loginFeedback);
-			}
-
-			@Override
-			protected void updateAjaxAttributes(AjaxRequestAttributes attributes)
-			{
-				super.updateAjaxAttributes(attributes);
-				attributes.getAjaxCallListeners().add(new AjaxCallListener() {
-					@Override
-					public CharSequence getBeforeSendHandler(Component component) {
-						return String.format("$('#%s').attr('disabled', 'disabled');", getMarkupId());
-					}
-
-					@Override
-					public CharSequence getCompleteHandler(Component component)
-					{
-						return String.format("$('#%s').removeAttr('disabled');", getMarkupId());
-					}
-				});
-			}
-		});
 	}
 
 	@Override
@@ -90,5 +66,10 @@ public class LoginPage extends WebPage
 		super.renderHead(response);
 		response.render(CssHeaderItem.forReference(BootstrapCssResourceReference.get()));
 		response.render(CssHeaderItem.forReference(DefaultThemeResourceReference.get()));
+	}
+
+	public boolean isValid(Credentials credentials)
+	{
+		return credentials.getUsername().equals(USERNAME) && credentials.getPassword().equals(PASSWORD);
 	}
 }

@@ -4,7 +4,6 @@ import org.apache.wicket.model.IModel;
 
 public class Credentials implements IModel<Credentials>
 {
-	@CredentialsValidatorAnnotation
 	private String username, password;
 
 	@Override
