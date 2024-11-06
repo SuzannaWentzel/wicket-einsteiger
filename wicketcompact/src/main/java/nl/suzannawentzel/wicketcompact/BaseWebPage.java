@@ -6,7 +6,12 @@ import nl.suzannawentzel.wicketcompact.resources.DefaultThemeResourceReference;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 
 public class BaseWebPage extends WebPage {
 	private Tenant tenant;
@@ -21,6 +26,12 @@ public class BaseWebPage extends WebPage {
 	protected void onInitialize() {
 		super.onInitialize();
 		this.tenant = Tenant.get();
+
+		try {
+			((HttpServletResponse) RequestCycle.get().getResponse().getContainerResponse()).sendRedirect("/login");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

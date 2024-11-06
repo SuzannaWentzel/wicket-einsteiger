@@ -116,6 +116,12 @@
 			<version>${jetty9.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
 
 		<!-- uncomment if WebSocket support is needed
 		<dependency>
