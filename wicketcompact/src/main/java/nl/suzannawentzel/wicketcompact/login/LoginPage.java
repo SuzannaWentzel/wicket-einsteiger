@@ -1,14 +1,11 @@
 package nl.suzannawentzel.wicketcompact.login;
 
-import nl.suzannawentzel.wicketcompact.LoadingIndicatorAjaxSubmitLink;
 import nl.suzannawentzel.wicketcompact.SgFeedbackPanel;
+import nl.suzannawentzel.wicketcompact.SgSession;
+import nl.suzannawentzel.wicketcompact.dashboard.HomePage;
 import nl.suzannawentzel.wicketcompact.resources.BootstrapCssResourceReference;
 import nl.suzannawentzel.wicketcompact.resources.DefaultThemeResourceReference;
-import org.apache.wicket.Component;
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.attributes.AjaxCallListener;
-import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
-import org.apache.wicket.bean.validation.PropertyValidator;
+import org.apache.wicket.Session;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
@@ -38,7 +35,8 @@ public class LoginPage extends WebPage
 			if (!isValid(form.getModelObject())) {
 				error("Credentials invalid");
 			} else {
-				setResponsePage(LoginPage.class);
+				((SgSession) Session.get()).setUserLoggedIn(form.getModelObject().getUsername());
+				setResponsePage(HomePage.class);
 			}
 		}
 	};

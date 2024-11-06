@@ -17,9 +17,12 @@ import nl.suzannawentzel.wicketcompact.tables.ModifyTablePage;
 import nl.suzannawentzel.wicketcompact.tables.TablesPage;
 import org.apache.wicket.ConverterLocator;
 import org.apache.wicket.IConverterLocator;
+import org.apache.wicket.Session;
 import org.apache.wicket.bean.validation.BeanValidationConfiguration;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.Request;
+import org.apache.wicket.request.Response;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -67,6 +70,12 @@ public class WicketApplication extends WebApplication
 
 		mountPage("/login", LoginPage.class);
 
+		getRequestCycleListeners().add(new LoginAssertingRequestcycleListener());
+	}
+
+	@Override
+	public Session newSession(Request request, Response response) {
+		return new SgSession(request);
 	}
 
 	@Override

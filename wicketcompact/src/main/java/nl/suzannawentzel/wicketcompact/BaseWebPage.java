@@ -3,6 +3,7 @@ package nl.suzannawentzel.wicketcompact;
 import nl.suzannawentzel.wicketcompact.resources.BootstrapCssResourceReference;
 import nl.suzannawentzel.wicketcompact.resources.CafeOneTheme;
 import nl.suzannawentzel.wicketcompact.resources.DefaultThemeResourceReference;
+import org.apache.wicket.Session;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
@@ -26,12 +27,6 @@ public class BaseWebPage extends WebPage {
 	protected void onInitialize() {
 		super.onInitialize();
 		this.tenant = Tenant.get();
-
-		try {
-			((HttpServletResponse) RequestCycle.get().getResponse().getContainerResponse()).sendRedirect("/login");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override

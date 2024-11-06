@@ -5,6 +5,7 @@ import nl.suzannawentzel.wicketcompact.categories.CategoriesPage;
 import nl.suzannawentzel.wicketcompact.tables.TablesPage;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.ContextImage;
 import org.apache.wicket.markup.html.panel.Panel;
 
@@ -24,6 +25,7 @@ public class Header extends Panel
 		navbar.add(new NavLink("categories", CategoriesPage.class));
 		navbar.add(new NavLink("items", ItemsPage.class));
 		navbar.add(new NavLink("tables", TablesPage.class));
+		navbar.add(new Label("username", "Welcome " + ((SgSession) getSession()).getUserLoggedIn()));
 
 		final Tenant tenant = Tenant.get();
 		navbar.add(new ContextImage("brand", tenant.equals(Tenant.DEFAULT)? "coffee.png" : "coffee_togo.png"));
