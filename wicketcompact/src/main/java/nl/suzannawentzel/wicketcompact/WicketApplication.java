@@ -11,6 +11,7 @@ import nl.suzannawentzel.wicketcompact.converters.CurrencyConverter;
 import nl.suzannawentzel.wicketcompact.converters.LocalDateConverter;
 import nl.suzannawentzel.wicketcompact.customers.Menu;
 import nl.suzannawentzel.wicketcompact.dashboard.HomePage;
+import nl.suzannawentzel.wicketcompact.exceptions.UnhandledExceptionPage;
 import nl.suzannawentzel.wicketcompact.login.LoginPage;
 import nl.suzannawentzel.wicketcompact.tables.CreateTablePage;
 import nl.suzannawentzel.wicketcompact.tables.ModifyTablePage;
@@ -71,6 +72,7 @@ public class WicketApplication extends WebApplication
 		mountPage("/login", LoginPage.class);
 
 		getRequestCycleListeners().add(new LoginAssertingRequestcycleListener());
+		getApplicationSettings().setInternalErrorPage(UnhandledExceptionPage.class);
 	}
 
 	@Override

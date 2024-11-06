@@ -18,7 +18,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 public class LoginPage extends WebPage
 {
 	private static final String USERNAME = "user";
-	private static final String PASSWORD = "veryStrongPassword";
+	private static final String PASSWORD = "vSP";
 
 	private TextField<String> usernameField;
 	private PasswordTextField passwordField;
