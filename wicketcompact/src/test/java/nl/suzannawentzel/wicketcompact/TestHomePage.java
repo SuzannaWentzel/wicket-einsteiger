@@ -1,6 +1,7 @@
 package nl.suzannawentzel.wicketcompact;
 
 import nl.suzannawentzel.wicketcompact.dashboard.HomePage;
+import nl.suzannawentzel.wicketcompact.login.LoginPage;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,16 +16,17 @@ public class TestHomePage
 	@Before
 	public void setUp()
 	{
-		tester = new WicketTester(new WicketApplication());
+		final WicketApplication application = new WicketApplication();
+		tester = new WicketTester(application);
 	}
 
 	@Test
-	public void homepageRendersSuccessfully()
+	public void givenHomepageRequestedWithoutLoginLoginRenders()
 	{
 		//start and render the test page
 		tester.startPage(HomePage.class);
 
 		//assert rendered page class
-		tester.assertRenderedPage(HomePage.class);
+		tester.assertRenderedPage(LoginPage.class);
 	}
 }

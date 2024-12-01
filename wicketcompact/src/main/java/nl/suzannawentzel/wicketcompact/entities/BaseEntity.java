@@ -1,5 +1,7 @@
 package nl.suzannawentzel.wicketcompact.entities;
 
+import java.io.Serializable;
+
 public class BaseEntity
 {
 	private Long id;

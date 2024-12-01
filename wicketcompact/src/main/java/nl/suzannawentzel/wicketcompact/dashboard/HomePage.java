@@ -16,6 +16,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
+import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.time.Duration;
@@ -28,7 +29,7 @@ public class HomePage extends BaseWebPage
 
 	private final NestedTree<DefaultMutableTreeNode> dashboardTree;
 
-	private final DataView<Order> orderDataView;
+	private final DataView<Order> orders;
 
 	private final WebMarkupContainer ordersParent;
 
@@ -46,11 +47,12 @@ public class HomePage extends BaseWebPage
 		this.dashboardTree.add(new WindowsTheme());
 
 		this.ordersParent = new WebMarkupContainer("ordersParent");
-		orderDataView = new DataView<Order>("orders", new OrdersDataProvider())
+		orders = new DataView<Order>("orders", new OrdersDataProvider())
 		{
 			@Override
 			protected void populateItem(Item<Order> item)
 			{
+				item.setModel(new CompoundPropertyModel<>(item.getModel()));
 				item.add(new Label("quantity"));
 				item.add(new Label("article.name"));
 				item.add(new Label("table.name"));
@@ -60,8 +62,7 @@ public class HomePage extends BaseWebPage
 
 				final Order order = item.getModelObject();
 				statusLabel.add(new AttributeAppender("class", () -> {
-					final OrderStatus status = order.getStatus();
-					switch (status) {
+					switch (order.getStatus()) {
 						case NEW:
 							return " badge-info";
 						case PREPARATION:
@@ -100,7 +101,7 @@ public class HomePage extends BaseWebPage
 		super.onInitialize();
 		add(this.dashboardTree);
 		add(this.ordersParent);
-		ordersParent.add(this.orderDataView);
+		ordersParent.add(this.orders);
 
 		add(new AbstractAjaxTimerBehavior(Duration.seconds(5))
 		{

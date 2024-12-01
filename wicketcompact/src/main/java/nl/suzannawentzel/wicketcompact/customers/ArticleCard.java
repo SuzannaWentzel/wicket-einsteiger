@@ -49,7 +49,7 @@ public class ArticleCard extends Panel
 			@Override
 			protected void onSubmit(AjaxRequestTarget target) {
 				super.onSubmit(target);
-				placeOrder(target);
+				placeOrder(target, amountInput.getModelObject());
 			}
 		};
 
@@ -83,8 +83,8 @@ public class ArticleCard extends Panel
 		orderConfirmation.setVisible(false);
 	}
 
-	private void placeOrder(AjaxRequestTarget target) {
-		ServiceRegistry.get(OrderService.class).save(new Order(getTable(), this.articleModel.getObject(), amountInput.getModelObject()));
+	private void placeOrder(AjaxRequestTarget target, Integer quantity) {
+		ServiceRegistry.get(OrderService.class).save(new Order(getTable(), this.articleModel.getObject(), quantity));
 		orderConfirmation.setVisible(true);
 		target.add(this.orderConfirmation);
 		target.appendJavaScript(String.format("$('#%s').show; window.setTimeout(() => { $('#%s').hide(600); }, 3000);", orderConfirmation.getMarkupId(), orderConfirmation.getMarkupId()));

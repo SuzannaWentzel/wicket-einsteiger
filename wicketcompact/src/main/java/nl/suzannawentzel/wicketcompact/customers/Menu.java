@@ -33,6 +33,7 @@ public class Menu extends WebPage
 			protected void populateItem(Item<Category> item)
 			{
 				item.add(new CategoryPanel("categoryPanel", item.getModelObject()));
+				item.setRenderBodyOnly(true);
 			}
 		};
 	}
@@ -60,5 +61,12 @@ public class Menu extends WebPage
 
 	public Table getTable() {
 		return this.tableModel.getObject();
+	}
+
+	@Override
+	protected void onDetach()
+	{
+		super.onDetach();
+		this.tableModel.detach();
 	}
 }

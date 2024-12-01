@@ -3,6 +3,7 @@ package nl.suzannawentzel.wicketcompact.login;
 import nl.suzannawentzel.wicketcompact.SgFeedbackPanel;
 import nl.suzannawentzel.wicketcompact.SgSession;
 import nl.suzannawentzel.wicketcompact.dashboard.HomePage;
+import nl.suzannawentzel.wicketcompact.models.EntityModel;
 import nl.suzannawentzel.wicketcompact.resources.BootstrapCssResourceReference;
 import nl.suzannawentzel.wicketcompact.resources.DefaultThemeResourceReference;
 import org.apache.wicket.Session;
@@ -11,9 +12,11 @@ import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
+import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 
 public class LoginPage extends WebPage
 {

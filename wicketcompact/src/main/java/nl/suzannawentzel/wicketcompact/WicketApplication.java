@@ -72,9 +72,13 @@ public class WicketApplication extends WebApplication
 
 		mountPage("/login", LoginPage.class);
 
-		getRequestCycleListeners().add(new LoginAssertingRequestcycleListener());
 		getApplicationSettings().setInternalErrorPage(UnhandledExceptionPage.class);
 		getExceptionSettings().setAjaxErrorHandlingStrategy(ExceptionSettings.AjaxErrorStrategy.INVOKE_FAILURE_HANDLER);
+		setupRequestCycleListeners();
+	}
+
+	protected void setupRequestCycleListeners() {
+		getRequestCycleListeners().add(new LoginAssertingRequestcycleListener());
 	}
 
 	@Override
