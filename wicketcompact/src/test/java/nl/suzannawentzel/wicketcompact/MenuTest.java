@@ -20,13 +20,13 @@ public class MenuTest
 				// do nothing
 			}
 		});
+
+		tester.startPage(HomePage.class);
+		tester.assertRenderedPage(HomePage.class);
 	}
 
 	@Test
 	public void navigation() {
-		tester.startPage(HomePage.class);
-		tester.assertRenderedPage(HomePage.class);
-
 		tester.clickLink("header:navbar:categories");
 		tester.assertRenderedPage(CategoriesPage.class);
 
@@ -35,5 +35,14 @@ public class MenuTest
 
 		tester.clickLink("header:navbar:tables");
 		tester.assertRenderedPage(TablesPage.class);
+	}
+
+	@Test
+	public void linkToActivePageDisabledOthersEnabled() {
+		tester.assertVisible("header:navbar:dashboard");
+		tester.assertDisabled("header:navbar:dashboard");
+
+		tester.assertVisible("header:navbar:items");
+		tester.assertEnabled("header:navbar:items");
 	}
 }

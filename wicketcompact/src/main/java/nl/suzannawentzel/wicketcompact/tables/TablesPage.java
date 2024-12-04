@@ -15,6 +15,7 @@ import org.apache.wicket.markup.html.navigation.paging.IPageable;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
+import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
@@ -39,10 +40,10 @@ public class TablesPage extends BaseEntitiesPage
 			@Override
 			protected void populateItem(Item<Table> item)
 			{
-				Table table = item.getModelObject();
-				item.add(new Label("name",table.getName()));
-				item.add(new Label("seats", table.getSeatCount()));
-				item.add(new Label("orderableElectronically", table.getOrderableElectronically()));
+				item.setModel(new CompoundPropertyModel<>(item.getModel()));
+				item.add(new Label("name"));
+				item.add(new Label("seatCount"));
+				item.add(new Label("orderableElectronically"));
 				item.add(new BookmarkablePageLink<>("modifyTable", ModifyTablePage.class, new PageParameters().add("id", item.getModelObject().getId())));
 			}
 		};

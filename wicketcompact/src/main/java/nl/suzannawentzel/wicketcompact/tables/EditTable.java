@@ -112,7 +112,7 @@ public class EditTable extends Panel
 		this.qrCode.add(dataAttributeModifier);
 	}
 
-	void setTable(Table table) {
+	public void setTable(Table table) {
 		form.setModelObject(table);
 	}
 }
