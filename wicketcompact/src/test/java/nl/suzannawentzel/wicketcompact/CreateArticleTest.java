@@ -15,7 +15,8 @@ public class CreateArticleTest extends BasePageWithoutLoginTest
 	}
 
 	@Test
-	public void createsArticle() {
+	public void createsArticle()
+	{
 		final FormTester formTester = tester.newFormTester("editArticle:form");
 		formTester.setValue("name", "Water");
 		formTester.select("category", 0);
@@ -25,5 +26,16 @@ public class CreateArticleTest extends BasePageWithoutLoginTest
 		formTester.submit();
 		tester.assertRenderedPage(ItemsPage.class);
 		tester.assertModelValue("articles:15:name", "Water");
+	}
+
+	@Test
+	public void validationMessages() {
+		final FormTester formTester = tester.newFormTester("editArticle:form");
+		formTester.select("category", 1);
+		formTester.setValue("price", "2,00");
+		formTester.setValue("imageUrl", "http://example.com/image.png");
+		formTester.setValue("description", "Necessary.");
+		formTester.submit();
+		tester.assertErrorMessages("The field 'name' is required, please enter a value.");
 	}
 }

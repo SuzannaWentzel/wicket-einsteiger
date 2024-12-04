@@ -48,7 +48,7 @@ public class ItemsPage extends BaseEntitiesPage
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		articles.setItemsPerPage(3);
+		articles.setItemsPerPage(20);
 		add(articles);
 	}
 

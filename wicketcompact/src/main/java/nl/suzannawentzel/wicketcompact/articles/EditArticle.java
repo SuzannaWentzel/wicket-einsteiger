@@ -69,7 +69,7 @@ public class EditArticle extends Panel
 			}
 		});
 
-		helpLink.setOutputMarkupId(true);
+		helpLink.setOutputMarkupPlaceholderTag(true);
 
 		this.nameField = new TextField<>("name");
 		nameField.add(new AjaxFormComponentUpdatingBehavior("change") {
@@ -87,7 +87,7 @@ public class EditArticle extends Panel
 				return imageUrl.getModelObject();
 			}
 		}));
-		image.setOutputMarkupId(true);
+		image.setOutputMarkupPlaceholderTag(true);
 
 		imageUrl = new TextField<String>("imageUrl").add(new PropertyValidator<>()).setLabel(Model.of("Image URL"));
 		imageUrl.add(new AjaxFormComponentUpdatingBehavior("change") {
@@ -120,8 +120,9 @@ public class EditArticle extends Panel
 		form.add(this.helpLink);
 	}
 
-	void setArticle(Article article) {
+	EditArticle setArticle(Article article) {
 		form.setModelObject(article);
+		return this;
 	}
 
 }
