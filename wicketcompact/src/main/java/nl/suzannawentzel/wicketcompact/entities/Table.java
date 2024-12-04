@@ -9,7 +9,7 @@ public class Table extends BaseEntity
 	public Table(String name, Integer seatCount) {
 		this.name = name;
 		this.seatCount = seatCount;
-		this.orderableElectronically = Boolean.TRUE;
+		this.orderableElectronically = Boolean.FALSE;
 	}
 
 	public Table() {
